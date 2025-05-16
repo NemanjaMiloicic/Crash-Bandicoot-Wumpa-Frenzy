@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://cg5f26b75j1rq"]
+
+[ext_resource type="Script" uid="uid://dlqwt8a2ehua" path="res://scripts/wumpa_fruit.gd" id="1_d3bsd"]
+[ext_resource type="AudioStream" uid="uid://bygajtf6it8sk" path="res://assets/sounds/wumpa_collect.wav" id="1_wqjhm"]
+[ext_resource type="Texture2D" uid="uid://da48g0bks1v1h" path="res://assets/sprites/wumpa.png" id="2_d3bsd"]
+
+[sub_resource type="Animation" id="Animation_d3bsd"]
+resource_name = "float"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_36odo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hcanq"]
+_data = {
+&"RESET": SubResource("Animation_36odo"),
+&"float": SubResource("Animation_d3bsd")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8437f"]
+radius = 5.0
+
+[node name="WumpaFruit" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_d3bsd")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_wqjhm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d3bsd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hcanq")
+}
+autoplay = "float"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8437f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

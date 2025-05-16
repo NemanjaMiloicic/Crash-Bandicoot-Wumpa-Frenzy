@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://dxflj3oigvtsa"]
+
+[ext_resource type="Texture2D" uid="uid://tdqs1an6ih8u" path="res://assets/sprites/grid_crate.png" id="1_35dtt"]
+[ext_resource type="Script" uid="uid://b6s53fenbydtx" path="res://scripts/grid_crate.gd" id="1_jk671"]
+[ext_resource type="AudioStream" uid="uid://bygajtf6it8sk" path="res://assets/sounds/wumpa_collect.wav" id="3_cm7nv"]
+[ext_resource type="AudioStream" uid="uid://ci4x3yr0i00he" path="res://assets/sounds/crate_bounce.wav" id="4_ucoib"]
+[ext_resource type="AudioStream" uid="uid://dmx2wy65v7ydh" path="res://assets/sounds/crate_break.wav" id="5_lfl0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm7nv"]
+size = Vector2(12, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfl0u"]
+size = Vector2(12, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk671"]
+size = Vector2(14, 12)
+
+[sub_resource type="Animation" id="Animation_ven1e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_lfl0u"]
+resource_name = "expand"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.551725, 0.449585), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_blv0o"]
+_data = {
+&"RESET": SubResource("Animation_ven1e"),
+&"expand": SubResource("Animation_lfl0u")
+}
+
+[node name="GridCrate" type="StaticBody2D"]
+script = ExtResource("1_jk671")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_35dtt")
+
+[node name="WumpaStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cm7nv")
+bus = &"SFX"
+
+[node name="BounceStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ucoib")
+bus = &"SFX2"
+
+[node name="BreakStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_lfl0u")
+
+[node name="Top" type="Area2D" parent="."]
+position = Vector2(0, -6)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_cm7nv")
+
+[node name="Bottom" type="Area2D" parent="."]
+position = Vector2(0, 6)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_lfl0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jk671")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_blv0o")
+}
+
+[connection signal="body_entered" from="Top" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Bottom" to="." method="_on_bottom_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxflj3oigvtsa"]
+
+[ext_resource type="Texture2D" uid="uid://tdqs1an6ih8u" path="res://assets/sprites/grid_crate.png" id="1_35dtt"]
+[ext_resource type="Script" uid="uid://b6s53fenbydtx" path="res://scenes/grid_crate.gd" id="1_jk671"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk671"]
+size = Vector2(14, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm7nv"]
+size = Vector2(14, 1)
+
+[node name="GridCrate" type="StaticBody2D"]
+script = ExtResource("1_jk671")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_35dtt")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_jk671")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_cm7nv")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
