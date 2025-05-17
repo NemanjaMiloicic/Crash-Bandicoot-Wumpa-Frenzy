@@ -6,6 +6,9 @@ var state_owner : Node
 
 func enter() -> void:
 	pass
+	
+func exit() -> void:
+	pass
 
 
 func physics_update(_delta: float) -> void:
@@ -19,5 +22,6 @@ func change_state(state_name: String) -> void:
 		push_error("State '%s' does not exist!" % state_name)
 		return
 	
+	state_owner.previous_state = state_owner.current_state
 	state_owner.current_state = state_owner.states[state_name]
 	state_owner.current_state.enter()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dxflj3oigvtsa"]
 
-[ext_resource type="Texture2D" uid="uid://tdqs1an6ih8u" path="res://assets/sprites/grid_crate.png" id="1_35dtt"]
+[ext_resource type="Texture2D" uid="uid://tdqs1an6ih8u" path="res://assets/sprites/crates/grid_crate.png" id="1_35dtt"]
 [ext_resource type="Script" uid="uid://b6s53fenbydtx" path="res://scripts/grid_crate.gd" id="1_jk671"]
 [ext_resource type="AudioStream" uid="uid://bygajtf6it8sk" path="res://assets/sounds/wumpa_collect.wav" id="3_cm7nv"]
 [ext_resource type="AudioStream" uid="uid://ci4x3yr0i00he" path="res://assets/sounds/crate_bounce.wav" id="4_ucoib"]
@@ -50,12 +50,12 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm7nv"]
-size = Vector2(12, 1)
+size = Vector2(14, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfl0u"]
-size = Vector2(12, 1)
+size = Vector2(14, 1)
 
-[node name="GridCrate" type="StaticBody2D"]
+[node name="GridCrate" type="StaticBody2D" groups=["crate"]]
 script = ExtResource("1_jk671")
 
 [node name="Crate" type="Area2D" parent="."]

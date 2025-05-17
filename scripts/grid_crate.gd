@@ -1,3 +1,4 @@
+class_name GridCrate
 extends StaticBody2D
 
 
@@ -26,7 +27,8 @@ func _on_bottom_body_entered(body: Node2D) -> void:
 
 
 func crate_hit(body:Node2D , top : bool) -> void:
-	if body is CharacterBody2D and body.current_state is not SpinState and not broken:
+	
+	if body is CharacterBody2D and body.current_state is not SpinState and body.current_state is not BellyFlopState and not broken:
 			if number_of_hits>0:
 				animation_player.play("expand")
 				if first_hit:

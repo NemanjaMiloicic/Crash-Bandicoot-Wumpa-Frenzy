@@ -8,10 +8,7 @@ func enter() -> void:
 	state_owner.spin_stream_player_2d.play()
 
 func physics_update(delta: float) -> void:
-	if state_owner.near_crates.size()>0:
-		for crate in state_owner.near_crates:
-			crate.destroy()
-		state_owner.near_crates.clear()
+	state_owner.destroy_crates()
 	
 	state_owner.velocity += state_owner.get_gravity() * delta
 	
@@ -25,6 +22,7 @@ func physics_update(delta: float) -> void:
 		return
 
 	var direction = Input.get_axis("ui_left", "ui_right")
+	state_owner.check_direction(direction)
 
 	if direction == 0:
 		state_owner.velocity.x = 0  

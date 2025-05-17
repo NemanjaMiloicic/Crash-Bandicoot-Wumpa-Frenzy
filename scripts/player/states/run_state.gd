@@ -5,7 +5,6 @@ func enter() -> void:
 	state_owner.animated_sprite.play("run")
 
 func physics_update(_delta: float) -> void:
-	
 	if state_owner.got_crystal and state_owner.is_on_floor():
 		change_state("VictoryState")
 		return
@@ -22,7 +21,10 @@ func physics_update(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_CTRL) and state_owner.can_spin:
 		change_state("SpinState")
 		return
-
+		
+	if Input.is_key_pressed(KEY_SHIFT) and state_owner.is_on_floor() and state_owner.can_slide:
+		change_state("SlideState")
+		
 	var direction = Input.get_axis("ui_left", "ui_right")
 
 	if direction == 0:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlqwt8a2ehua" path="res://scripts/wumpa_fruit.gd" id="1_d3bsd"]
 [ext_resource type="AudioStream" uid="uid://bygajtf6it8sk" path="res://assets/sounds/wumpa_collect.wav" id="1_wqjhm"]
-[ext_resource type="Texture2D" uid="uid://da48g0bks1v1h" path="res://assets/sprites/wumpa.png" id="2_d3bsd"]
+[ext_resource type="Texture2D" uid="uid://da48g0bks1v1h" path="res://assets/sprites/collectables/wumpa.png" id="2_d3bsd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8437f"]
 radius = 5.0
