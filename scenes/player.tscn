@@ -1,11 +1,13 @@
-[gd_scene load_steps=112 format=3 uid="uid://bhu8ojinbsekf"]
+[gd_scene load_steps=123 format=3 uid="uid://bhu8ojinbsekf"]
 
 [ext_resource type="Script" uid="uid://d4b51ha8ubi1e" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bn3teggbab3yi" path="res://assets/sprites/crash/belly_flop.png" id="2_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://klsarpajwem4" path="res://assets/sprites/crash/idle.png" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://cau2u2q4ti6vd" path="res://assets/sprites/crash/default_death.png" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://b7g8o2t4vrr3" path="res://assets/sprites/crash/jump.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://cy3navaf81wdl" path="res://assets/sprites/crash/crouch.png" id="3_ke2ow"]
 [ext_resource type="Texture2D" uid="uid://cwg8qrqymndml" path="res://assets/sprites/crash/run.png" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://qhdbuystmm15" path="res://assets/sprites/crash/crawl.png" id="3_ujl30"]
 [ext_resource type="Texture2D" uid="uid://g5gtd3nui2vp" path="res://assets/sprites/crash/hit_ground.png" id="4_60mlk"]
 [ext_resource type="Texture2D" uid="uid://db53b0drcmh1v" path="res://assets/sprites/crash/slide.png" id="6_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://tcicujbyfmbm" path="res://assets/sprites/crash/spin.png" id="6_f1ej7"]
@@ -21,6 +23,9 @@
 [ext_resource type="AudioStream" uid="uid://d3bsqisr8biq" path="res://assets/sounds/victory.wav" id="13_jej6c"]
 [ext_resource type="AudioStream" uid="uid://ddahkw7atk3uj" path="res://assets/sounds/spin.wav" id="15_oprun"]
 [ext_resource type="AudioStream" uid="uid://6fo01y56d0bk" path="res://assets/sounds/hit_ground.wav" id="21_i4ail"]
+[ext_resource type="AudioStream" uid="uid://ca03nvu6f83xs" path="res://assets/sounds/slide.wav" id="22_a38lo"]
+[ext_resource type="AudioStream" uid="uid://d0haseyq3jupy" path="res://assets/sounds/footsteps.ogg" id="23_4ni07"]
+[ext_resource type="AudioStream" uid="uid://dvasex3c1v42n" path="res://assets/sounds/jump.wav" id="24_l71n6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_irpag"]
 atlas = ExtResource("2_4r5pv")
@@ -38,6 +43,26 @@ region = Rect2(0, 0, 40, 42)
 atlas = ExtResource("2_4r5pv")
 region = Rect2(40, 0, 40, 42)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vfid"]
+atlas = ExtResource("3_ujl30")
+region = Rect2(5, 0, 40, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljgr3"]
+atlas = ExtResource("3_ujl30")
+region = Rect2(45, 0, 40, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr8ja"]
+atlas = ExtResource("3_ujl30")
+region = Rect2(85, 0, 40, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvmy4"]
+atlas = ExtResource("3_ujl30")
+region = Rect2(125, 0, 40, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbf1i"]
+atlas = ExtResource("3_ke2ow")
+region = Rect2(2, 0, 41, 40)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gl8cc"]
 atlas = ExtResource("2_qlg0r")
 region = Rect2(41, 0, 41, 48)
@@ -48,19 +73,19 @@ region = Rect2(1, 0, 41, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lw0jh"]
 atlas = ExtResource("4_60mlk")
-region = Rect2(0, 0, 42, 42)
+region = Rect2(0, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ry8ed"]
 atlas = ExtResource("4_60mlk")
-region = Rect2(0, 0, 42, 42)
+region = Rect2(0, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_au8ao"]
 atlas = ExtResource("4_60mlk")
-region = Rect2(42, 0, 42, 42)
+region = Rect2(40, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w5j5w"]
 atlas = ExtResource("4_60mlk")
-region = Rect2(42, 0, 42, 42)
+region = Rect2(40, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("2_g2els")
@@ -395,6 +420,31 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4vfid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljgr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr8ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvmy4")
+}],
+"loop": true,
+"name": &"crawl",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbf1i")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_gl8cc")
 }, {
 "duration": 1.0,
@@ -521,7 +571,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 20.0
+"speed": 22.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -692,8 +742,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v2ag"]
-radius = 5.0
-height = 20.0
+radius = 4.0
+height = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujl30"]
+size = Vector2(8, 10)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
@@ -704,11 +757,13 @@ script = ExtResource("1_g2els")
 position = Vector2(1, -12)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"idle"
+animation = &"slide_jump"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -11)
+position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_3v2ag")
 
 [node name="VictoryStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -717,9 +772,26 @@ bus = &"SFX"
 
 [node name="SpinStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_oprun")
+volume_db = -5.0
 
 [node name="HitGroundStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("21_i4ail")
+bus = &"SFX"
+
+[node name="SlideStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_a38lo")
+volume_db = -5.0
+pitch_scale = 1.1
+bus = &"SFX"
+
+[node name="RunStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_4ni07")
+volume_db = 5.0
+bus = &"SFX2"
+
+[node name="JumpStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_l71n6")
+volume_db = 2.0
 bus = &"SFX"
 
 [node name="SpinCooldown" type="Timer" parent="."]
@@ -727,6 +799,16 @@ one_shot = true
 
 [node name="SlideCooldown" type="Timer" parent="."]
 wait_time = 0.75
+
+[node name="SlideLeniency" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="CeilingCheckArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingCheckArea2D"]
+position = Vector2(0, -19)
+shape = SubResource("RectangleShape2D_ujl30")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="SpinCooldown" to="." method="_on_spin_cooldown_timeout"]

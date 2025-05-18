@@ -12,5 +12,6 @@ func enter() -> void:
 func physics_update(_delta: float) -> void:
 	state_owner.velocity.x = 0
 	state_owner.velocity.y = 0
-	state_owner.move_and_slide()
 	
+func on_animation_finished() -> void:
+	change_state("IdleState")

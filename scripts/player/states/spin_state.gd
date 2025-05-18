@@ -17,11 +17,13 @@ func physics_update(delta: float) -> void:
 		return
 
 	
-	if Input.is_action_just_pressed("ui_accept") and state_owner.is_on_floor():
+	if Input.is_action_just_pressed("jump") and state_owner.is_on_floor():
+		state_owner.jump_pressed = true
 		state_owner.velocity.y = state_owner.JUMP_VELOCITY
+		change_state("JumpState")
 		return
 
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("move_left", "move_right")
 	state_owner.check_direction(direction)
 
 	if direction == 0:
@@ -31,3 +33,6 @@ func physics_update(delta: float) -> void:
 
 	state_owner.animated_sprite.flip_h = direction < 0
 	state_owner.velocity.x = direction * state_owner.SPEED
+
+func on_animation_finished() -> void:
+	change_state("IdleState")

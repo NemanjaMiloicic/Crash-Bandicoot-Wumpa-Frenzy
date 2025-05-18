@@ -10,7 +10,7 @@
 size = Vector2(22, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jk671"]
-size = Vector2(14, 12)
+size = Vector2(12, 12)
 
 [sub_resource type="Animation" id="Animation_ven1e"]
 length = 0.001
@@ -50,10 +50,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm7nv"]
-size = Vector2(14, 1)
+size = Vector2(12, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfl0u"]
-size = Vector2(14, 1)
+size = Vector2(12, 1)
 
 [node name="GridCrate" type="StaticBody2D" groups=["crate"]]
 script = ExtResource("1_jk671")
