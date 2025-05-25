@@ -49,9 +49,6 @@ _data = {
 collision_mask = 2
 script = ExtResource("1_d3bsd")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("1_wqjhm")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_d3bsd")
 
@@ -63,5 +60,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_hcanq")
 }
 autoplay = "bounce"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_wqjhm")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

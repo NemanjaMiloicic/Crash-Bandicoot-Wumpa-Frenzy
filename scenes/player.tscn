@@ -1,4 +1,4 @@
-[gd_scene load_steps=179 format=3 uid="uid://bhu8ojinbsekf"]
+[gd_scene load_steps=184 format=3 uid="uid://bhu8ojinbsekf"]
 
 [ext_resource type="Script" uid="uid://d4b51ha8ubi1e" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bn3teggbab3yi" path="res://assets/sprites/crash/belly_flop.png" id="2_4r5pv"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://c3v3l872j3xb0" path="res://assets/sprites/crash/victory_dance_7.png" id="12_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://d3bsqisr8biq" path="res://assets/sounds/victory.wav" id="13_jej6c"]
 [ext_resource type="AudioStream" uid="uid://ddahkw7atk3uj" path="res://assets/sounds/spin.wav" id="15_oprun"]
+[ext_resource type="Texture2D" uid="uid://ct4r0srtp6wi3" path="res://assets/sprites/crash/rocket_shoes.png" id="17_giy8y"]
 [ext_resource type="Texture2D" uid="uid://b5luebt3dc3if" path="res://assets/sprites/crash/swing.png" id="18_gl8cc"]
 [ext_resource type="AudioStream" uid="uid://6fo01y56d0bk" path="res://assets/sounds/hit_ground.wav" id="21_i4ail"]
 [ext_resource type="AudioStream" uid="uid://ca03nvu6f83xs" path="res://assets/sounds/slide.wav" id="22_a38lo"]
@@ -41,6 +42,8 @@
 [ext_resource type="AudioStream" uid="uid://308c2b3vshir" path="res://assets/sounds/fire_death.mp3" id="39_j2b1d"]
 [ext_resource type="AudioStream" uid="uid://ccu06oqmf4hhg" path="res://assets/sounds/blinky.mp3" id="40_cs1tg"]
 [ext_resource type="AudioStream" uid="uid://8pfns8gdfuia" path="res://assets/sounds/electric_death.mp3" id="41_2dvfe"]
+[ext_resource type="AudioStream" uid="uid://bt0pc8kf8dqut" path="res://assets/sounds/rocket_shoes_speed.wav" id="43_fdfoy"]
+[ext_resource type="Script" uid="uid://6a6tf8dqo08r" path="res://scripts/sound_with_pitch.gd" id="44_hhpqf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_irpag"]
 atlas = ExtResource("2_4r5pv")
@@ -293,6 +296,14 @@ region = Rect2(240, 0, 40, 58)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
 atlas = ExtResource("3_dqkch")
 region = Rect2(280, 0, 40, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcvyg"]
+atlas = ExtResource("17_giy8y")
+region = Rect2(3, 0, 40, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ealyq"]
+atlas = ExtResource("17_giy8y")
+region = Rect2(43, 0, 40, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("3_qhqgy")
@@ -841,6 +852,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_mcvyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ealyq")
+}],
+"loop": true,
+"name": &"rocket_shoes",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_smehm")
 }, {
 "duration": 1.0,
@@ -1099,10 +1121,9 @@ script = ExtResource("1_g2els")
 position = Vector2(1, -12)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"fire_death"
+animation = &"rocket_shoes"
 autoplay = "idle"
-frame = 8
-frame_progress = 1.0
+frame_progress = 0.477706
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
@@ -1126,57 +1147,63 @@ shape = SubResource("RectangleShape2D_ujl30")
 
 [node name="Sounds" type="Node" parent="."]
 
-[node name="DeathStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="DeathStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("30_t4otl")
 bus = &"SFX"
 
-[node name="SwingingStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="SwingingStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("33_487ah")
 bus = &"SFX"
 
-[node name="FlyStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="FlyStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("29_dt7fs")
+bus = &"SFX"
 
-[node name="JumpStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="JumpStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("24_l71n6")
 volume_db = 2.0
 bus = &"SFX"
 
-[node name="RunStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="RunStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("23_4ni07")
-volume_db = 5.0
 bus = &"SFX2"
 
-[node name="SlideStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="SlideStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("22_a38lo")
 volume_db = -5.0
-pitch_scale = 1.1
 bus = &"SFX"
 
-[node name="HitGroundStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="HitGroundStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("21_i4ail")
 bus = &"SFX"
 
-[node name="SpinStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="SpinStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("15_oprun")
 volume_db = -5.0
+bus = &"SFX"
 
-[node name="VictoryStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="VictoryStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("13_jej6c")
 bus = &"SFX"
 
-[node name="FireDeathStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="FireDeathStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("39_j2b1d")
 bus = &"SFX2"
 
-[node name="BlinkStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="BlinkStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("40_cs1tg")
 bus = &"SFX"
 
-[node name="ElectricDeathStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="ElectricDeathStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("41_2dvfe")
 bus = &"SFX2"
+
+[node name="SpeedStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("43_fdfoy")
+bus = &"SFX"
+script = ExtResource("44_hhpqf")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="SpinCooldown" to="." method="_on_spin_cooldown_timeout"]
 [connection signal="timeout" from="SlideCooldown" to="." method="_on_slide_cooldown_timeout"]
+[connection signal="finished" from="Sounds/SpeedStreamPlayer" to="." method="_on_speed_stream_player_finished"]
