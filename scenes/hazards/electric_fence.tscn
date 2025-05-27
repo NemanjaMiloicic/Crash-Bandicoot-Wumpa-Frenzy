@@ -1,0 +1,125 @@
+[gd_scene load_steps=28 format=3 uid="uid://bbr4wivbn137k"]
+
+[ext_resource type="Texture2D" uid="uid://fm6oh0lvau2v" path="res://assets/sprites/hazards/electric_fence_1.png" id="1_dt1xb"]
+[ext_resource type="PackedScene" uid="uid://brdkngm1kxd6t" path="res://scenes/hazards/hitzone.tscn" id="1_jv2e4"]
+[ext_resource type="Texture2D" uid="uid://cmw0iq7a5idav" path="res://assets/sprites/hazards/electric_fence_2.png" id="2_buiba"]
+[ext_resource type="Texture2D" uid="uid://bi8lp0folh6qs" path="res://assets/sprites/hazards/electric_fence_3.png" id="3_kxglu"]
+[ext_resource type="Texture2D" uid="uid://b6kqitwpmdd3v" path="res://assets/sprites/hazards/electric_fence_4.png" id="4_h8v71"]
+[ext_resource type="Texture2D" uid="uid://by7wpyjrupymf" path="res://assets/sprites/hazards/electric_fence_5.png" id="5_gjedx"]
+[ext_resource type="Texture2D" uid="uid://dxvlinbnjx23c" path="res://assets/sprites/hazards/electric_fence_6.png" id="6_i6iap"]
+[ext_resource type="Texture2D" uid="uid://bqp5amqde2tw7" path="res://assets/sprites/hazards/electric_fence_7.png" id="7_v1ltu"]
+[ext_resource type="Texture2D" uid="uid://bkwolsj5mcc1w" path="res://assets/sprites/hazards/electric_fence_8.png" id="8_j1n5m"]
+[ext_resource type="Texture2D" uid="uid://bv5rhaoll7cjt" path="res://assets/sprites/hazards/electric_fence_9.png" id="9_yaa0g"]
+[ext_resource type="Texture2D" uid="uid://bkl7ldu66eayt" path="res://assets/sprites/hazards/electric_fence_10.png" id="10_u7hu8"]
+[ext_resource type="Texture2D" uid="uid://cp7mky4eixhc7" path="res://assets/sprites/hazards/electric_fence_11.png" id="11_7ph00"]
+[ext_resource type="Texture2D" uid="uid://bbujkal6tgabx" path="res://assets/sprites/hazards/electric_fence_12.png" id="12_sxr40"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxgdq"]
+atlas = ExtResource("1_dt1xb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q7np"]
+atlas = ExtResource("2_buiba")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qtni"]
+atlas = ExtResource("3_kxglu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul2rw"]
+atlas = ExtResource("4_h8v71")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y352m"]
+atlas = ExtResource("5_gjedx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42gob"]
+atlas = ExtResource("6_i6iap")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02jeo"]
+atlas = ExtResource("7_v1ltu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkh7b"]
+atlas = ExtResource("8_j1n5m")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p5l2"]
+atlas = ExtResource("9_yaa0g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hkq6"]
+atlas = ExtResource("10_u7hu8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jmfl"]
+atlas = ExtResource("11_7ph00")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w58i"]
+atlas = ExtResource("12_sxr40")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y352m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxgdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q7np")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qtni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul2rw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y352m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42gob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02jeo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkh7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p5l2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hkq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jmfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7w58i")
+}],
+"loop": true,
+"name": &"electric",
+"speed": 11.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o66in"]
+
+[node name="ElectricFence" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_y352m")
+animation = &"electric"
+autoplay = "electric"
+frame_progress = 0.529993
+
+[node name="HitZone" parent="." instance=ExtResource("1_jv2e4")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_o66in")

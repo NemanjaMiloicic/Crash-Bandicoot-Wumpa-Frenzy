@@ -1,8 +1,9 @@
-[gd_scene load_steps=184 format=3 uid="uid://bhu8ojinbsekf"]
+[gd_scene load_steps=200 format=3 uid="uid://bhu8ojinbsekf"]
 
 [ext_resource type="Script" uid="uid://d4b51ha8ubi1e" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bn3teggbab3yi" path="res://assets/sprites/crash/belly_flop.png" id="2_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://klsarpajwem4" path="res://assets/sprites/crash/idle.png" id="2_g2els"]
+[ext_resource type="Shader" uid="uid://lujyds8im6mh" path="res://shaders/player.gdshader" id="2_g5jhy"]
 [ext_resource type="Texture2D" uid="uid://cau2u2q4ti6vd" path="res://assets/sprites/crash/default_death.png" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://b7g8o2t4vrr3" path="res://assets/sprites/crash/jump.png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cy3navaf81wdl" path="res://assets/sprites/crash/crouch.png" id="3_ke2ow"]
@@ -44,6 +45,13 @@
 [ext_resource type="AudioStream" uid="uid://8pfns8gdfuia" path="res://assets/sounds/electric_death.mp3" id="41_2dvfe"]
 [ext_resource type="AudioStream" uid="uid://bt0pc8kf8dqut" path="res://assets/sounds/rocket_shoes_speed.wav" id="43_fdfoy"]
 [ext_resource type="Script" uid="uid://6a6tf8dqo08r" path="res://scripts/sound_with_pitch.gd" id="44_hhpqf"]
+[ext_resource type="Texture2D" uid="uid://tmunyboj87bo" path="res://assets/sprites/aku_aku_following.png" id="46_holxr"]
+[ext_resource type="Texture2D" uid="uid://c6q0bvpd7er6o" path="res://assets/sprites/aku_aku_following_gold.png" id="47_mx1m4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_holxr"]
+shader = ExtResource("2_g5jhy")
+shader_parameter/flash_color = Color(0.479927, 0.430514, 0.00784656, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_irpag"]
 atlas = ExtResource("2_4r5pv")
@@ -1105,6 +1113,43 @@ animations = [{
 "speed": 9.0
 }]
 
+[sub_resource type="Animation" id="Animation_g5jhy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_mx1m4"]
+resource_name = "flash"
+length = 1.41
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.933333, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4gjji"]
+_data = {
+&"RESET": SubResource("Animation_g5jhy"),
+&"flash": SubResource("Animation_mx1m4")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v2ag"]
 radius = 4.0
 height = 24.0
@@ -1112,18 +1157,119 @@ height = 24.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujl30"]
 size = Vector2(7, 0.75)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qms75"]
+atlas = ExtResource("46_holxr")
+region = Rect2(0, 0, 19, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lovq"]
+atlas = ExtResource("47_mx1m4")
+region = Rect2(0, 0, 18, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0usgs"]
+atlas = ExtResource("47_mx1m4")
+region = Rect2(0, 0, 15, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7iw1"]
+atlas = ExtResource("46_holxr")
+region = Rect2(0, 0, 16, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fccsy"]
+atlas = ExtResource("12_3v2ag")
+region = Rect2(78, 0, 11, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e4c5e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qms75")
+}],
+"loop": false,
+"name": &"float",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lovq")
+}],
+"loop": true,
+"name": &"gold_float",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0usgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7iw1")
+}],
+"loop": true,
+"name": &"max_aku_float",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fccsy")
+}],
+"loop": false,
+"name": &"not_here",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_4gjji"]
+resource_name = "float"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AkuAkuSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4)]
+}
+
+[sub_resource type="Animation" id="Animation_u2ulf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AkuAkuSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6e8lb"]
+_data = {
+&"RESET": SubResource("Animation_u2ulf"),
+&"float": SubResource("Animation_4gjji")
+}
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_holxr")
 position = Vector2(1, -12)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"rocket_shoes"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.477706
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_4gjji")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
@@ -1202,6 +1348,22 @@ bus = &"SFX2"
 stream = ExtResource("43_fdfoy")
 bus = &"SFX"
 script = ExtResource("44_hhpqf")
+
+[node name="InvincibilityTime" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="AkuAkuSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_e4c5e")
+animation = &"not_here"
+autoplay = "not_here"
+
+[node name="AkuAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6e8lb")
+}
+autoplay = "float"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="SpinCooldown" to="." method="_on_spin_cooldown_timeout"]

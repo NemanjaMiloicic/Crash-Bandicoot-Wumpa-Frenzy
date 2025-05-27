@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bf1j0kq4kcvq6"]
+
+[ext_resource type="Script" uid="uid://dsr01wc0xc0bi" path="res://scripts/rocket_shoes.gd" id="1_fc6ft"]
+[ext_resource type="Texture2D" uid="uid://bun6aax0v7rt2" path="res://assets/sprites/collectables/rocket_shoes.png" id="1_ksrsk"]
+[ext_resource type="AudioStream" uid="uid://ms78cfxo7hhl" path="res://assets/sounds/rocket_shoes.mp3" id="3_llibx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc6ft"]
+atlas = ExtResource("1_ksrsk")
+region = Rect2(0, 0, 40, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llibx"]
+atlas = ExtResource("1_ksrsk")
+region = Rect2(40, 0, 40, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8mb0g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc6ft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llibx")
+}],
+"loop": true,
+"name": &"blasting",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_suoit"]
+size = Vector2(24, 7)
+
+[node name="RocketShoes" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_fc6ft")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8mb0g")
+animation = &"blasting"
+autoplay = "blasting"
+frame_progress = 0.553805
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -0.5)
+shape = SubResource("RectangleShape2D_suoit")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_llibx")
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

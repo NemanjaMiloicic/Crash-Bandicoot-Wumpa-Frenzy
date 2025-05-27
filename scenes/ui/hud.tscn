@@ -1,0 +1,213 @@
+[gd_scene load_steps=13 format=3 uid="uid://l5ffuovymicg"]
+
+[ext_resource type="Texture2D" uid="uid://da48g0bks1v1h" path="res://assets/sprites/collectables/wumpa.png" id="1_5ysmq"]
+[ext_resource type="Script" uid="uid://coesj4jl0sgp1" path="res://scripts/hud.gd" id="1_6fi6k"]
+[ext_resource type="Texture2D" uid="uid://cbxo45rgwy3hq" path="res://assets/sprites/crates/crate.png" id="2_6fi6k"]
+[ext_resource type="FontFile" uid="uid://c3tetpumnx4dh" path="res://assets/sprites/font/ThaleahFat.ttf" id="3_047uy"]
+[ext_resource type="Texture2D" uid="uid://bolxqhwiwhqnd" path="res://assets/sprites/collectables/life.png" id="3_uo2fv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_047uy"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5pdws"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hd3ao"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0i1j5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Animation" id="Animation_6fi6k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5ysmq"]
+resource_name = "bobbing"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -15), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uo2fv"]
+_data = {
+&"RESET": SubResource("Animation_6fi6k"),
+&"bobbing": SubResource("Animation_5ysmq")
+}
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_6fi6k")
+
+[node name="PlayerInfoBox" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_047uy")
+
+[node name="WumpaFrame" type="Panel" parent="PlayerInfoBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 30.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5pdws")
+
+[node name="Avatar" type="TextureRect" parent="PlayerInfoBox/WumpaFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5ysmq")
+expand_mode = 1
+
+[node name="WumpaLabel" type="Label" parent="PlayerInfoBox/WumpaFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 35.0
+offset_top = -11.5
+offset_right = 75.0
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.403922, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_047uy")
+theme_override_font_sizes/font_size = 60
+text = "0"
+
+[node name="CrateFrame" type="Panel" parent="PlayerInfoBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hd3ao")
+
+[node name="Avatar" type="TextureRect" parent="PlayerInfoBox/CrateFrame"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_6fi6k")
+expand_mode = 1
+
+[node name="CrateLabel" type="Label" parent="PlayerInfoBox/CrateFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 30.0
+offset_top = -20.0
+offset_right = 247.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.403922, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_047uy")
+theme_override_font_sizes/font_size = 60
+text = "0/0"
+
+[node name="LifeFrame" type="Panel" parent="PlayerInfoBox"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -20.0
+offset_right = -112.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0i1j5")
+
+[node name="Avatar" type="TextureRect" parent="PlayerInfoBox/LifeFrame"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_uo2fv")
+
+[node name="LifeLabel" type="Label" parent="PlayerInfoBox/LifeFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -11.5
+offset_right = 80.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.403922, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_047uy")
+theme_override_font_sizes/font_size = 60
+text = "0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerInfoBox"]
+libraries = {
+&"": SubResource("AnimationLibrary_uo2fv")
+}
+autoplay = "bobbing"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

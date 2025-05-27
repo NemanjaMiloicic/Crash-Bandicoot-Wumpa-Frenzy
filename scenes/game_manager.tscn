@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfjkjb1mxijr4"]
+
+[ext_resource type="Script" uid="uid://brgvwotqhh11o" path="res://scripts/game_manager.gd" id="1_hwd4i"]
+[ext_resource type="AudioStream" uid="uid://dvrixrqyunsvc" path="res://assets/sounds/aku_hurt.wav" id="2_glms7"]
+[ext_resource type="PackedScene" uid="uid://ddl715kt0sxbk" path="res://scenes/other/music.tscn" id="2_udu3i"]
+[ext_resource type="AudioStream" uid="uid://chr25igtpbqhr" path="res://assets/music/aku_invincible.wav" id="4_oo155"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_hwd4i")
+
+[node name="Music" parent="." instance=ExtResource("2_udu3i")]
+
+[node name="MaxAkuState" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_glms7")
+bus = &"SFX"
+
+[node name="InvincibilityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oo155")
+bus = &"Music"
+
+[connection signal="timeout" from="MaxAkuState" to="." method="_on_max_aku_state_timeout"]
+[connection signal="finished" from="InvincibilityMusic" to="." method="_on_invincibility_music_finished"]

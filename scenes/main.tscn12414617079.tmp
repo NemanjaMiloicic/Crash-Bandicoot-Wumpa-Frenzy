@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxi6nh1k24u2u"]
+
+[ext_resource type="Script" uid="uid://du15ot7w4iv5g" path="res://scripts/main.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://brgvwotqhh11o" path="res://scripts/game_manager.gd" id="2_sugp2"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_0wfyh")
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_sugp2")
+
+[node name="CurrentLevel" type="Node" parent="."]
