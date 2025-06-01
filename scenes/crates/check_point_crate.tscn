@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmec2nb2mrrac"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_28p6b"]
+[ext_resource type="Script" uid="uid://b308ua0q5trcj" path="res://scripts/crates/check_point_crate.gd" id="2_ecn03"]
+[ext_resource type="Texture2D" uid="uid://78cysg66wvff" path="res://assets/sprites/crates/checkpoint_crate.png" id="2_en3u1"]
+[ext_resource type="AudioStream" uid="uid://krjgt5rn1tvn" path="res://assets/sounds/checkpoint_sound.wav" id="4_ecn03"]
+
+[node name="CheckPointCrate" instance=ExtResource("1_28p6b")]
+script = ExtResource("2_ecn03")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_en3u1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource("4_ecn03")
+volume_db = 7.0
+bus = &"SFX"

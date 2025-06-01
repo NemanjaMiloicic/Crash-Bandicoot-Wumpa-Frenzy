@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://gqvprhq2mqk7"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_x3e60"]
+[ext_resource type="Texture2D" uid="uid://ohxxecg4qwpq" path="res://assets/sprites/crates/random_crate.png" id="2_j0qyi"]
+[ext_resource type="Script" uid="uid://dypxy7ex0jbgy" path="res://scripts/crates/random_crate.gd" id="2_r3u7m"]
+
+[node name="RandomCrate" instance=ExtResource("1_x3e60")]
+script = ExtResource("2_r3u7m")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_j0qyi")

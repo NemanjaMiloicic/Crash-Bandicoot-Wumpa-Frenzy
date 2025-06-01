@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2xvk46tr62gt"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_1keuu"]
+[ext_resource type="Script" uid="uid://cemb2hpxd16ax" path="res://scripts/crates/life_crate.gd" id="2_3yfyx"]
+[ext_resource type="Texture2D" uid="uid://bs5nibwxedxwg" path="res://assets/sprites/crates/life_crate.png" id="2_4i4im"]
+
+[node name="LifeCrate" instance=ExtResource("1_1keuu")]
+script = ExtResource("2_3yfyx")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_4i4im")

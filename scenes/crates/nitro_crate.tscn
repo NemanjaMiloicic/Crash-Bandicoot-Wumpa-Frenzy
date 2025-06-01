@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfr2qegqw5fig"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_qppoa"]
+[ext_resource type="Texture2D" uid="uid://bn382fk0ktb5l" path="res://assets/sprites/crates/nitro_crate.png" id="2_3mdo3"]
+[ext_resource type="Script" uid="uid://28bkv0wm6kv2" path="res://scripts/crates/nitro_crate.gd" id="2_p8w0w"]
+[ext_resource type="AudioStream" uid="uid://bqegfgv2ab2bc" path="res://assets/sounds/nitro_jump.wav" id="4_p8w0w"]
+
+[node name="NitroCrate" groups=["exploding_crate"] instance=ExtResource("1_qppoa")]
+script = ExtResource("2_p8w0w")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_3mdo3")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource("4_p8w0w")
+max_distance = 250.0
+bus = &"SFX2"
+
+[node name="BounceTimer" type="Timer" parent="." index="9"]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="BounceTimer" to="." method="_on_bounce_timer_timeout"]

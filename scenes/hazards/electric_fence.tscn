@@ -108,7 +108,7 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o66in"]
 
-[node name="ElectricFence" type="Node2D"]
+[node name="ElectricFence" type="Node2D" groups=["electric"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.9, 0.9)

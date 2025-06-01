@@ -1,4 +1,4 @@
-[gd_scene load_steps=200 format=3 uid="uid://bhu8ojinbsekf"]
+[gd_scene load_steps=217 format=3 uid="uid://bhu8ojinbsekf"]
 
 [ext_resource type="Script" uid="uid://d4b51ha8ubi1e" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bn3teggbab3yi" path="res://assets/sprites/crash/belly_flop.png" id="2_4r5pv"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bglevsbp7kmy2" path="res://assets/sprites/crash/victory_dance_2.png" id="7_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://ddcwgd16h8pqp" path="res://assets/sprites/crash/fly_spin.png" id="7_wqfne"]
 [ext_resource type="Texture2D" uid="uid://chume2cmuapm6" path="res://assets/sprites/crash/slide_jump_2.png" id="8_fulsm"]
+[ext_resource type="Texture2D" uid="uid://peskj0vnwix5" path="res://assets/sprites/crash/explosion_death.png" id="8_sc3ue"]
 [ext_resource type="Texture2D" uid="uid://bub154tpln0mf" path="res://assets/sprites/crash/fire_death_2.png" id="8_t4otl"]
 [ext_resource type="Texture2D" uid="uid://bbxljjb0uyme5" path="res://assets/sprites/crash/victory_dance_3.png" id="8_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://vdku0a5hk1f" path="res://assets/sprites/crash/hang_spin.png" id="9_md1ol"]
@@ -31,8 +32,11 @@
 [ext_resource type="Texture2D" uid="uid://c3v3l872j3xb0" path="res://assets/sprites/crash/victory_dance_7.png" id="12_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://d3bsqisr8biq" path="res://assets/sounds/victory.wav" id="13_jej6c"]
 [ext_resource type="AudioStream" uid="uid://ddahkw7atk3uj" path="res://assets/sounds/spin.wav" id="15_oprun"]
+[ext_resource type="Texture2D" uid="uid://cnquhpa7besat" path="res://assets/sprites/crash/idle2.png" id="17_2gdjj"]
 [ext_resource type="Texture2D" uid="uid://ct4r0srtp6wi3" path="res://assets/sprites/crash/rocket_shoes.png" id="17_giy8y"]
+[ext_resource type="Texture2D" uid="uid://c20jc54isbdkr" path="res://assets/sprites/crash/pogo.png" id="18_4gjji"]
 [ext_resource type="Texture2D" uid="uid://b5luebt3dc3if" path="res://assets/sprites/crash/swing.png" id="18_gl8cc"]
+[ext_resource type="Texture2D" uid="uid://dp5ujd602xwov" path="res://assets/sprites/crash/pogo_jump.png" id="19_u2ulf"]
 [ext_resource type="AudioStream" uid="uid://6fo01y56d0bk" path="res://assets/sounds/hit_ground.wav" id="21_i4ail"]
 [ext_resource type="AudioStream" uid="uid://ca03nvu6f83xs" path="res://assets/sounds/slide.wav" id="22_a38lo"]
 [ext_resource type="AudioStream" uid="uid://d0haseyq3jupy" path="res://assets/sounds/footsteps.ogg" id="23_4ni07"]
@@ -47,6 +51,7 @@
 [ext_resource type="Script" uid="uid://6a6tf8dqo08r" path="res://scripts/sound_with_pitch.gd" id="44_hhpqf"]
 [ext_resource type="Texture2D" uid="uid://tmunyboj87bo" path="res://assets/sprites/aku_aku_following.png" id="46_holxr"]
 [ext_resource type="Texture2D" uid="uid://c6q0bvpd7er6o" path="res://assets/sprites/aku_aku_following_gold.png" id="47_mx1m4"]
+[ext_resource type="AudioStream" uid="uid://btdonqj8ydvg5" path="res://assets/sounds/boing.mp3" id="48_6e8lb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_holxr"]
 shader = ExtResource("2_g5jhy")
@@ -108,6 +113,14 @@ region = Rect2(46, 0, 40, 39)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kp0if"]
 atlas = ExtResource("6_bj30b")
 region = Rect2(86, 0, 40, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qywrh"]
+atlas = ExtResource("8_sc3ue")
+region = Rect2(5, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jopkk"]
+atlas = ExtResource("8_sc3ue")
+region = Rect2(45, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2xkbm"]
 atlas = ExtResource("7_hax0n")
@@ -273,6 +286,30 @@ region = Rect2(160, 0, 40, 43)
 atlas = ExtResource("2_g2els")
 region = Rect2(200, 0, 40, 43)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvigm"]
+atlas = ExtResource("17_2gdjj")
+region = Rect2(5, 0, 40, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ej1x"]
+atlas = ExtResource("17_2gdjj")
+region = Rect2(45, 0, 40, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlfvf"]
+atlas = ExtResource("17_2gdjj")
+region = Rect2(85, 0, 40, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i18u8"]
+atlas = ExtResource("17_2gdjj")
+region = Rect2(125, 0, 40, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46bxm"]
+atlas = ExtResource("17_2gdjj")
+region = Rect2(165, 0, 40, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llmf1"]
+atlas = ExtResource("17_2gdjj")
+region = Rect2(125, 0, 40, 43)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
 atlas = ExtResource("3_dqkch")
 region = Rect2(0, 0, 40, 58)
@@ -304,6 +341,22 @@ region = Rect2(240, 0, 40, 58)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
 atlas = ExtResource("3_dqkch")
 region = Rect2(280, 0, 40, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4c5e"]
+atlas = ExtResource("18_4gjji")
+region = Rect2(0, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72noi"]
+atlas = ExtResource("18_4gjji")
+region = Rect2(40, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0j382"]
+atlas = ExtResource("18_4gjji")
+region = Rect2(80, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3jfe"]
+atlas = ExtResource("19_u2ulf")
+region = Rect2(0, 0, 29, 49)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mcvyg"]
 atlas = ExtResource("17_giy8y")
@@ -668,6 +721,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qywrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jopkk")
+}],
+"loop": true,
+"name": &"explosion_death",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2xkbm")
 }, {
 "duration": 1.0,
@@ -824,6 +888,24 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvigm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ej1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlfvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i18u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46bxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llmf1")
 }],
 "loop": true,
 "name": &"idle",
@@ -854,9 +936,31 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wqfne")
 }],
-"loop": false,
+"loop": true,
 "name": &"jump",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4c5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72noi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0j382")
+}],
+"loop": true,
+"name": &"pogo",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3jfe")
+}],
+"loop": false,
+"name": &"pogo_jump",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1215,6 +1319,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_u2ulf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AkuAkuSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_4gjji"]
 resource_name = "float"
 length = 1.5
@@ -1232,30 +1351,16 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, -4)]
 }
 
-[sub_resource type="Animation" id="Animation_u2ulf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AkuAkuSprite2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6e8lb"]
 _data = {
 &"RESET": SubResource("Animation_u2ulf"),
 &"float": SubResource("Animation_4gjji")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 5
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -1263,8 +1368,9 @@ material = SubResource("ShaderMaterial_holxr")
 position = Vector2(1, -12)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"idle"
+animation = &"explosion_death"
 autoplay = "idle"
+frame_progress = 0.345313
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -1348,6 +1454,10 @@ bus = &"SFX2"
 stream = ExtResource("43_fdfoy")
 bus = &"SFX"
 script = ExtResource("44_hhpqf")
+
+[node name="PogoStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("48_6e8lb")
+bus = &"SFX"
 
 [node name="InvincibilityTime" type="Timer" parent="."]
 wait_time = 1.5

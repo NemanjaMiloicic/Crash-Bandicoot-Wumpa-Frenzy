@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://bbm1y55g6mwyv"]
 
 [ext_resource type="Texture2D" uid="uid://b6c2x3yhpg648" path="res://assets/sprites/collectables/crystal.png" id="1_0mmd5"]
-[ext_resource type="Script" uid="uid://yxkckrrxng0x" path="res://scripts/crystal.gd" id="1_t4dcj"]
+[ext_resource type="Script" uid="uid://yxkckrrxng0x" path="res://scripts/collectibles/crystal.gd" id="1_t4dcj"]
 [ext_resource type="AudioStream" uid="uid://bwcwouu1xey6e" path="res://assets/sounds/collect_gem.wav" id="3_g5hse"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4dcj"]
