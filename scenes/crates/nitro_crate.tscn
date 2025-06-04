@@ -1,15 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfr2qegqw5fig"]
+[gd_scene load_steps=7 format=3 uid="uid://cfr2qegqw5fig"]
 
 [ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_qppoa"]
 [ext_resource type="Texture2D" uid="uid://bn382fk0ktb5l" path="res://assets/sprites/crates/nitro_crate.png" id="2_3mdo3"]
 [ext_resource type="Script" uid="uid://28bkv0wm6kv2" path="res://scripts/crates/nitro_crate.gd" id="2_p8w0w"]
+[ext_resource type="AudioStream" uid="uid://x3yc0mcvurup" path="res://assets/sounds/metal_crate_activate.wav" id="4_6dalj"]
 [ext_resource type="AudioStream" uid="uid://bqegfgv2ab2bc" path="res://assets/sounds/nitro_jump.wav" id="4_p8w0w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p8w0w"]
 
 [node name="NitroCrate" groups=["exploding_crate"] instance=ExtResource("1_qppoa")]
 script = ExtResource("2_p8w0w")
 
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_p8w0w")
+animation = &"default"
+
 [node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("2_3mdo3")
+
+[node name="BrokenCrate" parent="." index="7"]
+stream = ExtResource("4_6dalj")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="." index="8"]
 stream = ExtResource("4_p8w0w")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxl568mbvb6eb"]
+
+[ext_resource type="PackedScene" uid="uid://cl13favnw6byi" path="res://scenes/crates/invisible_crates/invisible_normal_crate.tscn" id="1_sa18h"]
+[ext_resource type="Script" uid="uid://coas71oh6x8mv" path="res://scripts/crates/invisible_crates/invisible_life_crate.gd" id="2_bc8tt"]
+
+[node name="InvisibleLifeCrate" instance=ExtResource("1_sa18h")]
+script = ExtResource("2_bc8tt")

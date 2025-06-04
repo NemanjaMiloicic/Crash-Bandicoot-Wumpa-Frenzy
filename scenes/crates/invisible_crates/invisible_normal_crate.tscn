@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl13favnw6byi"]
+
+[ext_resource type="Texture2D" uid="uid://ckyml1vawkhca" path="res://assets/sprites/crates/invisible_crate.png" id="1_dbwcm"]
+[ext_resource type="AudioStream" uid="uid://bxptpcykukcbw" path="res://assets/sounds/appear.wav" id="2_dxmet"]
+[ext_resource type="Script" uid="uid://dhl4o8n0qjyfy" path="res://scripts/crates/invisible_crates/invisible_normal_crate.gd" id="2_f8vri"]
+
+[node name="InvisibleNormalCrate" type="Sprite2D" groups=["crates"]]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_dbwcm")
+script = ExtResource("2_f8vri")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_dxmet")
+max_distance = 500.0
+bus = &"SFX"
+
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

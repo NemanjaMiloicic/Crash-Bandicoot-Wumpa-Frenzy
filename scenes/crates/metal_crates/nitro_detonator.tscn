@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://ki4sg7d0yve7"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_hlyi4"]
+[ext_resource type="Texture2D" uid="uid://c4xi471yhnkap" path="res://assets/sprites/crates/metal_crates/nitro_detonator.png" id="2_x2567"]
+[ext_resource type="Script" uid="uid://mq38uvwiogss" path="res://scripts/crates/metal_crates/nitro_detonator.gd" id="2_x5724"]
+[ext_resource type="AudioStream" uid="uid://x3yc0mcvurup" path="res://assets/sounds/metal_crate_activate.wav" id="4_rafxc"]
+[ext_resource type="Texture2D" uid="uid://cdv7sob8nmjjc" path="res://assets/sprites/crates/metal_crates/nitro_detonator_activated.png" id="4_x5724"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x5724"]
+
+[node name="NitroDetonator" groups=["activatable_crate", "metal_crate"] instance=ExtResource("1_hlyi4")]
+script = ExtResource("2_x5724")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_x5724")
+animation = &"default"
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_x2567")
+
+[node name="BrokenCrate" parent="." index="6"]
+stream = ExtResource("4_rafxc")
+
+[node name="Activated" type="Sprite2D" parent="." index="8"]
+visible = false
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_x5724")

@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7idiq1xej81r"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_yqeab"]
+[ext_resource type="Texture2D" uid="uid://ru12fj7plctw" path="res://assets/sprites/crates/tnt_crate_timer.png" id="2_wpr22"]
+[ext_resource type="Script" uid="uid://6y3rfj8pvdj8" path="res://scripts/crates/tnt_crate.gd" id="2_y77ha"]
+[ext_resource type="Texture2D" uid="uid://cbwne7vph6f62" path="res://assets/sprites/crates/tnt_crate.png" id="3_y77ha"]
+[ext_resource type="AudioStream" uid="uid://bpynw6v5qrode" path="res://assets/sounds/tnt_timer.wav" id="5_y77ha"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vekn"]
+atlas = ExtResource("2_wpr22")
+region = Rect2(1, 0, 22, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5bod"]
+atlas = ExtResource("2_wpr22")
+region = Rect2(23, 0, 22, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsvde"]
+atlas = ExtResource("2_wpr22")
+region = Rect2(45, 0, 22, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2epvg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vekn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5bod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsvde")
+}],
+"loop": false,
+"name": &"tnt_timer",
+"speed": 0.83
+}]
+
+[node name="TntCrate" groups=["exploding_crate"] instance=ExtResource("1_yqeab")]
+script = ExtResource("2_y77ha")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+visible = true
+sprite_frames = SubResource("SpriteFrames_2epvg")
+animation = &"tnt_timer"
+frame = 2
+frame_progress = 1.0
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_y77ha")
+
+[node name="Timer" type="Timer" parent="." index="8"]
+wait_time = 3.35
+one_shot = true
+
+[node name="TntTimer" type="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource("5_y77ha")
+bus = &"SFX2"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

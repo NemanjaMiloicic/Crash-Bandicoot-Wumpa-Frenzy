@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8r6ujyfc8f7f"]
+
+[ext_resource type="PackedScene" uid="uid://cg5f26b75j1rq" path="res://scenes/collectibles/wumpa_fruit.tscn" id="1_t3cmi"]
+[ext_resource type="Script" uid="uid://dg55j83r8un1e" path="res://scripts/collectibles/wumpa_fruit_x_5.gd" id="2_7twd5"]
+[ext_resource type="Texture2D" uid="uid://mnd4wl2eo5ml" path="res://assets/sprites/collectables/x5.png" id="3_b6mr8"]
+
+[node name="WumpaFruitX5" instance=ExtResource("1_t3cmi")]
+script = ExtResource("2_7twd5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" index="0"]
+position = Vector2(-3, 3)
+scale = Vector2(0.012, 0.012)
+texture = ExtResource("3_b6mr8")

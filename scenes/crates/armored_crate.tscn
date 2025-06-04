@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=3 uid="uid://4lb3ls5eg14v"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_sf4xy"]
+[ext_resource type="Script" uid="uid://c61uk402qoj6k" path="res://scripts/crates/armored_crate.gd" id="2_fhd3l"]
+[ext_resource type="Texture2D" uid="uid://bg77qjem8kx7v" path="res://assets/sprites/crates/break_crate.png" id="2_umclk"]
+[ext_resource type="Texture2D" uid="uid://03ha81digtpr" path="res://assets/sprites/crates/armored_crate_land.png" id="3_fhd3l"]
+[ext_resource type="Texture2D" uid="uid://cfda82an8iwhm" path="res://assets/sprites/crates/armored_crate.png" id="4_ohnk1"]
+[ext_resource type="AudioStream" uid="uid://d26vqglnhdnsw" path="res://assets/sounds/armored_crate_land.wav" id="6_fhd3l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qofgp"]
+atlas = ExtResource("2_umclk")
+region = Rect2(0, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7o3r"]
+atlas = ExtResource("2_umclk")
+region = Rect2(23, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmi0i"]
+atlas = ExtResource("2_umclk")
+region = Rect2(46, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umw0h"]
+atlas = ExtResource("2_umclk")
+region = Rect2(69, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38tfh"]
+atlas = ExtResource("3_fhd3l")
+region = Rect2(4, 0, 24, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8fi1"]
+atlas = ExtResource("3_fhd3l")
+region = Rect2(28, 0, 24, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gur4k"]
+atlas = ExtResource("3_fhd3l")
+region = Rect2(4, 0, 24, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0pkln"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qofgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7o3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmi0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umw0h")
+}],
+"loop": false,
+"name": &"broken_crate",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38tfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8fi1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gur4k")
+}],
+"loop": false,
+"name": &"land",
+"speed": 10.0
+}]
+
+[node name="ArmoredCrate" instance=ExtResource("1_sf4xy")]
+script = ExtResource("2_fhd3l")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+visible = true
+sprite_frames = SubResource("SpriteFrames_0pkln")
+animation = &"land"
+frame = 2
+frame_progress = 1.0
+
+[node name="Sprite2D" parent="." index="2"]
+position = Vector2(-0.0624998, 0)
+scale = Vector2(0.755952, 0.75)
+texture = ExtResource("4_ohnk1")
+
+[node name="Land" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource("6_fhd3l")
+volume_db = 7.0
+bus = &"SFX2"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,12 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmec2nb2mrrac"]
+[gd_scene load_steps=9 format=3 uid="uid://cmec2nb2mrrac"]
 
 [ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_28p6b"]
 [ext_resource type="Script" uid="uid://b308ua0q5trcj" path="res://scripts/crates/check_point_crate.gd" id="2_ecn03"]
 [ext_resource type="Texture2D" uid="uid://78cysg66wvff" path="res://assets/sprites/crates/checkpoint_crate.png" id="2_en3u1"]
+[ext_resource type="Texture2D" uid="uid://dxscjagshop3n" path="res://assets/sprites/crates/break_checkpoint.png" id="3_ex21q"]
 [ext_resource type="AudioStream" uid="uid://krjgt5rn1tvn" path="res://assets/sounds/checkpoint_sound.wav" id="4_ecn03"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0blg"]
+atlas = ExtResource("3_ex21q")
+region = Rect2(0, 0, 22, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcjo6"]
+atlas = ExtResource("3_ex21q")
+region = Rect2(22, 0, 22, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsus3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0blg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcjo6")
+}],
+"loop": true,
+"name": &"broken_checkpoint",
+"speed": 5.0
+}]
 
 [node name="CheckPointCrate" instance=ExtResource("1_28p6b")]
 script = ExtResource("2_ecn03")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_jsus3")
+animation = &"broken_checkpoint"
+frame_progress = 0.00163607
 
 [node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("2_en3u1")

@@ -1,0 +1,98 @@
+[gd_scene load_steps=16 format=3 uid="uid://d0xuhx5mx2baa"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_7p7jr"]
+[ext_resource type="Texture2D" uid="uid://dkhpbwyl1xh06" path="res://assets/sprites/crates/grid_crate_bounce.png" id="2_aldex"]
+[ext_resource type="Script" uid="uid://dq3aa3vioujuk" path="res://scripts/crates/grid_crate.gd" id="2_v5vny"]
+[ext_resource type="Texture2D" uid="uid://bg77qjem8kx7v" path="res://assets/sprites/crates/break_crate.png" id="3_v5vny"]
+[ext_resource type="Texture2D" uid="uid://tdqs1an6ih8u" path="res://assets/sprites/crates/grid_crate.png" id="4_25ao1"]
+[ext_resource type="AudioStream" uid="uid://ci4x3yr0i00he" path="res://assets/sounds/crate_bounce.wav" id="5_3a73s"]
+[ext_resource type="AudioStream" uid="uid://bygajtf6it8sk" path="res://assets/sounds/wumpa_collect.wav" id="6_8kdxy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4l84q"]
+atlas = ExtResource("2_aldex")
+region = Rect2(2, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2js3"]
+atlas = ExtResource("2_aldex")
+region = Rect2(26, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wma7i"]
+atlas = ExtResource("2_aldex")
+region = Rect2(50, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd4ja"]
+atlas = ExtResource("3_v5vny")
+region = Rect2(0, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdxc5"]
+atlas = ExtResource("3_v5vny")
+region = Rect2(23, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3kul"]
+atlas = ExtResource("3_v5vny")
+region = Rect2(46, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs4qr"]
+atlas = ExtResource("3_v5vny")
+region = Rect2(69, 0, 23, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t3epa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4l84q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2js3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wma7i")
+}],
+"loop": false,
+"name": &"bounce",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd4ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdxc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3kul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs4qr")
+}],
+"loop": false,
+"name": &"broken_crate",
+"speed": 12.0
+}]
+
+[node name="GridCrate" instance=ExtResource("1_7p7jr")]
+script = ExtResource("2_v5vny")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_t3epa")
+animation = &"bounce"
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("4_25ao1")
+
+[node name="Bounce" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource("5_3a73s")
+volume_db = 10.0
+bus = &"SFX2"
+
+[node name="Wumpa" type="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource("6_8kdxy")
+max_polyphony = 2
+bus = &"SFX2"
+
+[node name="Timer" type="Timer" parent="." index="10"]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

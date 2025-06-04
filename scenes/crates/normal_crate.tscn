@@ -1,21 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://b35exmcjoe33y"]
+[gd_scene load_steps=14 format=3 uid="uid://b35exmcjoe33y"]
 
 [ext_resource type="Texture2D" uid="uid://bg77qjem8kx7v" path="res://assets/sprites/crates/break_crate.png" id="1_eewhu"]
 [ext_resource type="Texture2D" uid="uid://cbxo45rgwy3hq" path="res://assets/sprites/crates/crate.png" id="1_t6jgg"]
 [ext_resource type="Script" uid="uid://bsf0qttsr5kms" path="res://scripts/crates/normal_crate.gd" id="1_vvrdv"]
-[ext_resource type="Texture2D" uid="uid://dxscjagshop3n" path="res://assets/sprites/crates/break_checkpoint.png" id="2_hu5ts"]
 [ext_resource type="AudioStream" uid="uid://dmx2wy65v7ydh" path="res://assets/sounds/crate_break.wav" id="4_s2f6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66356"]
 size = Vector2(20, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4l42g"]
-atlas = ExtResource("2_hu5ts")
-region = Rect2(0, 0, 22, 19)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r4g60"]
-atlas = ExtResource("2_hu5ts")
-region = Rect2(22, 0, 22, 19)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vvrdv"]
 atlas = ExtResource("1_eewhu")
@@ -35,17 +26,6 @@ region = Rect2(69, 0, 23, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t6jgg"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4l42g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r4g60")
-}],
-"loop": true,
-"name": &"broken_checkpoint",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vvrdv")
@@ -88,7 +68,7 @@ shape = SubResource("RectangleShape2D_66356")
 visible = false
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_t6jgg")
-animation = &"broken_checkpoint"
+animation = &"broken_crate"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
@@ -113,12 +93,13 @@ shape = SubResource("RectangleShape2D_vvrdv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_s2f6b")
 
-[node name="BrokenCrate" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_s2f6b")
-bus = &"SFX2"
-
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, 6)
+
+[node name="BrokenCrate" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_s2f6b")
+volume_db = 8.0
+bus = &"SFX2"
 
 [connection signal="body_entered" from="Crate" to="." method="_on_crate_body_entered"]
 [connection signal="body_exited" from="Crate" to="." method="_on_crate_body_exited"]

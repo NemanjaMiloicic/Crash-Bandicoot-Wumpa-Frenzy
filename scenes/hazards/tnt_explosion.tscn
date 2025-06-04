@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://1s5afjx3orq1"]
+
+[ext_resource type="PackedScene" uid="uid://cwcbu38llnnwk" path="res://scenes/hazards/nitro_explosion.tscn" id="1_bltq8"]
+[ext_resource type="Texture2D" uid="uid://cl32hj705mnhe" path="res://assets/sprites/hazards/tnt_explosion.png" id="2_dsskx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsskx"]
+atlas = ExtResource("2_dsskx")
+region = Rect2(0, 416, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc4eb"]
+atlas = ExtResource("2_dsskx")
+region = Rect2(32, 416, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21c23"]
+atlas = ExtResource("2_dsskx")
+region = Rect2(64, 416, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgpj5"]
+atlas = ExtResource("2_dsskx")
+region = Rect2(96, 416, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7myuq"]
+atlas = ExtResource("2_dsskx")
+region = Rect2(128, 416, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tsqg"]
+atlas = ExtResource("2_dsskx")
+region = Rect2(160, 416, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bltq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsskx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uc4eb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21c23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgpj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7myuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tsqg")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="TntExplosion" instance=ExtResource("1_bltq8")]
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_bltq8")
+frame = 0
+frame_progress = 0.0

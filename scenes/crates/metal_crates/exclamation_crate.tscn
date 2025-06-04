@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://br43cy1sktspn"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_p751x"]
+[ext_resource type="Script" uid="uid://dp7qrq2mxb73k" path="res://scripts/crates/metal_crates/exclamation_crate.gd" id="2_eixw0"]
+[ext_resource type="AudioStream" uid="uid://x3yc0mcvurup" path="res://assets/sounds/metal_crate_activate.wav" id="3_5yg28"]
+[ext_resource type="Texture2D" uid="uid://bh1n3ogy2hudc" path="res://assets/sprites/crates/metal_crates/exclamation_crate.png" id="3_i0axy"]
+[ext_resource type="Texture2D" uid="uid://bmq5h7dg44epu" path="res://assets/sprites/crates/metal_crates/exclamation_crate_activated.png" id="5_q6ixn"]
+
+[node name="ExclamationCrate" groups=["activatable_crate", "metal_crate"] instance=ExtResource("1_p751x")]
+script = ExtResource("2_eixw0")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_i0axy")
+
+[node name="BrokenCrate" parent="." index="7"]
+stream = ExtResource("3_5yg28")
+
+[node name="Activated" type="Sprite2D" parent="." index="8"]
+visible = false
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_q6ixn")
+
+[node name="Timer" type="Timer" parent="." index="9"]
+wait_time = 0.25
+one_shot = true

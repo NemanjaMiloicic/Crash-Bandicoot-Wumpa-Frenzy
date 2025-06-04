@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://nyglqb0q5max"]
+
+[ext_resource type="Texture2D" uid="uid://bmq5h7dg44epu" path="res://assets/sprites/crates/metal_crates/exclamation_crate_activated.png" id="1_d1wuv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1wuv"]
+size = Vector2(16, 14)
+
+[node name="MetalCrate" type="StaticBody2D" groups=["crates", "metal_crate"]]
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_d1wuv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d1wuv")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba08rygsfd1wd"]
+
+[ext_resource type="PackedScene" uid="uid://cl13favnw6byi" path="res://scenes/crates/invisible_crates/invisible_normal_crate.tscn" id="1_k1mb3"]
+[ext_resource type="Script" uid="uid://bia82skqlnqhe" path="res://scripts/crates/invisible_crates/invisible_metal_crate.gd" id="2_iu32i"]
+
+[node name="InvisibleMetalCrate" groups=["metal_crate"] instance=ExtResource("1_k1mb3")]
+script = ExtResource("2_iu32i")
