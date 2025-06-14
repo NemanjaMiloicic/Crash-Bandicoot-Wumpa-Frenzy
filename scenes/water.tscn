@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://drx1v68tjdytr"]
+
+[ext_resource type="Script" uid="uid://dn1f2kk2326q2" path="res://scripts/water.gd" id="1_bdk6y"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_elfxw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bdk6y"]
+distance = -39.0
+
+[node name="Water" type="StaticBody2D"]
+collision_mask = 2
+script = ExtResource("1_bdk6y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_elfxw")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -55)
+shape = SubResource("WorldBoundaryShape2D_bdk6y")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

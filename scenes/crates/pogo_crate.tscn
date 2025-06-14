@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhhnli6yt3d88"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_t82d1"]
+[ext_resource type="Texture2D" uid="uid://c4dpkl3niuqy2" path="res://assets/sprites/crates/pogo_crate.png" id="2_ubrb0"]
+[ext_resource type="Script" uid="uid://btwtguevmbu8" path="res://scripts/crates/pogo_crate.gd" id="2_xyf0c"]
+
+[node name="PogoCrate" instance=ExtResource("1_t82d1")]
+script = ExtResource("2_xyf0c")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_ubrb0")

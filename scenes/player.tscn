@@ -1,4 +1,4 @@
-[gd_scene load_steps=217 format=3 uid="uid://bhu8ojinbsekf"]
+[gd_scene load_steps=228 format=3 uid="uid://bhu8ojinbsekf"]
 
 [ext_resource type="Script" uid="uid://d4b51ha8ubi1e" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bn3teggbab3yi" path="res://assets/sprites/crash/belly_flop.png" id="2_4r5pv"]
@@ -36,7 +36,10 @@
 [ext_resource type="Texture2D" uid="uid://ct4r0srtp6wi3" path="res://assets/sprites/crash/rocket_shoes.png" id="17_giy8y"]
 [ext_resource type="Texture2D" uid="uid://c20jc54isbdkr" path="res://assets/sprites/crash/pogo.png" id="18_4gjji"]
 [ext_resource type="Texture2D" uid="uid://b5luebt3dc3if" path="res://assets/sprites/crash/swing.png" id="18_gl8cc"]
+[ext_resource type="Texture2D" uid="uid://d0fspyxclen3t" path="res://assets/sprites/crash/jetboard.png" id="19_lxlsd"]
 [ext_resource type="Texture2D" uid="uid://dp5ujd602xwov" path="res://assets/sprites/crash/pogo_jump.png" id="19_u2ulf"]
+[ext_resource type="Texture2D" uid="uid://cwh8n6584woff" path="res://assets/sprites/crash/jetboard_moving.png" id="20_ha2mi"]
+[ext_resource type="Texture2D" uid="uid://rslgnl2l2htn" path="res://assets/sprites/crash/jetboard_speeding.png" id="21_apa73"]
 [ext_resource type="AudioStream" uid="uid://6fo01y56d0bk" path="res://assets/sounds/hit_ground.wav" id="21_i4ail"]
 [ext_resource type="AudioStream" uid="uid://ca03nvu6f83xs" path="res://assets/sounds/slide.wav" id="22_a38lo"]
 [ext_resource type="AudioStream" uid="uid://d0haseyq3jupy" path="res://assets/sounds/footsteps.ogg" id="23_4ni07"]
@@ -52,6 +55,8 @@
 [ext_resource type="Texture2D" uid="uid://tmunyboj87bo" path="res://assets/sprites/aku_aku_following.png" id="46_holxr"]
 [ext_resource type="Texture2D" uid="uid://c6q0bvpd7er6o" path="res://assets/sprites/aku_aku_following_gold.png" id="47_mx1m4"]
 [ext_resource type="AudioStream" uid="uid://btdonqj8ydvg5" path="res://assets/sounds/boing.mp3" id="48_6e8lb"]
+[ext_resource type="AudioStream" uid="uid://c8e0jkigw4pr5" path="res://assets/sounds/water_jet.mp3" id="54_74r1k"]
+[ext_resource type="AudioStream" uid="uid://cxmnax3762bg1" path="res://assets/sounds/water_jet_boost.mp3" id="55_8svfe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_holxr"]
 shader = ExtResource("2_g5jhy")
@@ -309,6 +314,30 @@ region = Rect2(165, 0, 40, 43)
 [sub_resource type="AtlasTexture" id="AtlasTexture_llmf1"]
 atlas = ExtResource("17_2gdjj")
 region = Rect2(125, 0, 40, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l1xu"]
+atlas = ExtResource("19_lxlsd")
+region = Rect2(0, 0, 54, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inwxp"]
+atlas = ExtResource("19_lxlsd")
+region = Rect2(60, 0, 54, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb62r"]
+atlas = ExtResource("20_ha2mi")
+region = Rect2(0, 0, 54, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tfe1"]
+atlas = ExtResource("20_ha2mi")
+region = Rect2(60, 0, 54, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfrof"]
+atlas = ExtResource("21_apa73")
+region = Rect2(0, 0, 57, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsqmb"]
+atlas = ExtResource("21_apa73")
+region = Rect2(57, 0, 57, 47)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
 atlas = ExtResource("3_dqkch")
@@ -913,6 +942,39 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_5l1xu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inwxp")
+}],
+"loop": true,
+"name": &"jetboard_idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb62r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tfe1")
+}],
+"loop": true,
+"name": &"jetboard_moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfrof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsqmb")
+}],
+"loop": true,
+"name": &"jetboard_speeding",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4ni07")
 }, {
 "duration": 1.0,
@@ -936,7 +998,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wqfne")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 12.0
 }, {
@@ -1360,7 +1422,6 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 5
 collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -1368,8 +1429,10 @@ material = SubResource("ShaderMaterial_holxr")
 position = Vector2(1, -12)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"idle"
+animation = &"spin"
 autoplay = "idle"
+frame = 6
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -1458,6 +1521,14 @@ script = ExtResource("44_hhpqf")
 stream = ExtResource("48_6e8lb")
 bus = &"SFX"
 
+[node name="JetboardRunning" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("54_74r1k")
+bus = &"SFX"
+
+[node name="JetboardBoost" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("55_8svfe")
+bus = &"SFX"
+
 [node name="InvincibilityTime" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
@@ -1473,6 +1544,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_6e8lb")
 }
 autoplay = "float"
+
+[node name="Node2D" type="Node2D" parent="."]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="SpinCooldown" to="." method="_on_spin_cooldown_timeout"]

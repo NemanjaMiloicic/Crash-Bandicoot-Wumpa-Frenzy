@@ -1,0 +1,120 @@
+[gd_scene load_steps=16 format=3 uid="uid://cwuvx231vavg5"]
+
+[ext_resource type="Script" uid="uid://blpnhcuxd1io1" path="res://scripts/enemies/frog/frog.gd" id="1_kosjv"]
+[ext_resource type="Texture2D" uid="uid://beshtxfevnwb4" path="res://assets/sprites/enemies/frog.png" id="1_lohqt"]
+[ext_resource type="PackedScene" uid="uid://6q2x41rotij1" path="res://scenes/hazards/enemy_hitzone.tscn" id="3_d72w0"]
+[ext_resource type="AudioStream" uid="uid://cpntgb6lq738v" path="res://assets/sounds/spin_enemy.wav" id="4_5p7qk"]
+[ext_resource type="AudioStream" uid="uid://c466ufyvmlirk" path="res://assets/sounds/enemy_bounce.wav" id="5_jksd0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p7qk"]
+atlas = ExtResource("1_lohqt")
+region = Rect2(56, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jksd0"]
+atlas = ExtResource("1_lohqt")
+region = Rect2(6, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_noff5"]
+atlas = ExtResource("1_lohqt")
+region = Rect2(31, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c1ia"]
+atlas = ExtResource("1_lohqt")
+region = Rect2(6, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07b2c"]
+atlas = ExtResource("1_lohqt")
+region = Rect2(31, 0, 25, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jksd0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p7qk")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jksd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_noff5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c1ia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07b2c")
+}],
+"loop": false,
+"name": &"stand",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lohqt"]
+radius = 1.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lohqt"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lohqt"]
+size = Vector2(106, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jksd0"]
+size = Vector2(14, 3)
+
+[node name="Frog" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+script = ExtResource("1_kosjv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_jksd0")
+animation = &"jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_lohqt")
+
+[node name="HitboxArea" parent="." instance=ExtResource("3_d72w0")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_lohqt")
+
+[node name="EnemyArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyArea"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_lohqt")
+
+[node name="HeadArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadArea"]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_jksd0")
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[node name="SpinDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5p7qk")
+bus = &"SFX2"
+
+[node name="BounceDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jksd0")
+volume_db = 10.0
+bus = &"SFX2"
+
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="EnemyArea" to="." method="_on_enemy_area_body_entered"]
+[connection signal="body_exited" from="EnemyArea" to="." method="_on_enemy_area_body_exited"]
+[connection signal="body_entered" from="HeadArea" to="." method="_on_head_area_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://2pqkcti7n53b"]
+
+[ext_resource type="PackedScene" uid="uid://b35exmcjoe33y" path="res://scenes/crates/normal_crate.tscn" id="1_uo2u8"]
+[ext_resource type="Texture2D" uid="uid://cujo3wvqj6r2k" path="res://assets/sprites/crates/propeller_crate.png" id="2_6uf3f"]
+[ext_resource type="Script" uid="uid://b4rfmx78qf865" path="res://scripts/crates/propeller_crate.gd" id="2_sd0v5"]
+
+[node name="PropellerCrate" instance=ExtResource("1_uo2u8")]
+script = ExtResource("2_sd0v5")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_6uf3f")
