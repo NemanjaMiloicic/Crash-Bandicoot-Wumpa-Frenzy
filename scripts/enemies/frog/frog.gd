@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var death_timer: Timer = $DeathTimer
 @onready var spin_death_sound: AudioStreamPlayer = $SpinDeathSound
 @onready var bounce_death_sound: AudioStreamPlayer = $BounceDeathSound
+@onready var ribbit_sound: AudioStreamPlayer2D = $RibbitSound
 
 
 
@@ -36,13 +37,7 @@ func _ready():
 	
 
 func _physics_process(delta):
-	if is_dead:
-		if spun:
-			velocity.x += knockback_direction * KNOCKBACK 
-			move_and_slide()
-			return
-		else:
-			animated_sprite_2d.visible = false  
+	EnemyHelper.death(self)
 	if current_state:
 		current_state.physics_update(delta)
 	move_and_slide()
@@ -70,41 +65,10 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	elif animated_sprite_2d.animation == "jump":
 		is_jumping = false
 
-func die() -> void:
-	is_dead = true
-	current_state.exit()
-	animated_sprite_2d.play("jump")
-	collision_shape_2d.set_deferred("disabled" , true)
-	death_timer.start()
-
-func die_by_bounce() -> void:
-	bounce_death_sound.play()
-	die()
-
-func die_by_hit(body : Node2D) -> void:
-	spin_death_sound.play()
-	knockback_direction = body.facing_right
-	die()
-
 
 func _on_death_timer_timeout() -> void:
 	queue_free()
 
 
 func _on_head_area_body_entered(body: Node2D) -> void:
-	if is_dead:
-		return
-
-	if not body.is_in_group("player"):
-		return
-	
-	is_dead = true
-	
-	if body.current_state is BellyFlopState:
-		die_by_bounce()
-	elif body.current_state is JumpState:
-		if body.slid_jumped:
-			body.velocity.y = body.JUMP_VELOCITY 
-		else:
-			body.velocity.y = body.JUMP_VELOCITY - BOUNCE
-		die_by_bounce()
+	EnemyHelper.bounce(self , body)

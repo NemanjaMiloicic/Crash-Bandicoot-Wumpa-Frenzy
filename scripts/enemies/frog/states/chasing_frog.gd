@@ -7,14 +7,19 @@ func physics_update(delta: float) -> void:
 	if not state_owner.player:
 		return
 
-	var dir_to_player = state_owner.player.global_position.x - state_owner.global_position.x
-	state_owner.direction = sign(dir_to_player)
-	state_owner.animated_sprite_2d.flip_h = state_owner.direction < 0
+	if state_owner.is_on_floor():
+		var dir_to_player = state_owner.player.global_position.x - state_owner.global_position.x
+		var new_direction = sign(dir_to_player)
 
-	if state_owner.is_on_floor() and state_owner.can_move:
-		if state_owner.can_jump:
-			state_owner.velocity.x = state_owner.direction * state_owner.SPEED
-			state_owner.can_jump = false
+		if new_direction != 0 and new_direction != state_owner.direction:
+			state_owner.direction = new_direction
+			state_owner.animated_sprite_2d.flip_h = state_owner.direction < 0
+
+		if state_owner.can_move:
+			if state_owner.can_jump:
+				state_owner.ribbit_sound.play()
+				state_owner.velocity.x = state_owner.direction * state_owner.SPEED
+				state_owner.can_jump = false
 
 	if state_owner.is_on_floor() and not state_owner.is_jumping and state_owner.animated_sprite_2d.animation != "stand":
 		state_owner.velocity = Vector2.ZERO

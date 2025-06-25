@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn13vepiemo0r"
-path="res://.godot/imported/propeller.png-b22517bd48b6852e8daec6d97d6c29a8.ctex"
+uid="uid://3y4ufvmwmss2"
+path="res://.godot/imported/hermit_crab.png-6c6524a90b1dbdb733d3595d05970131.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/collectables/propeller.png"
-dest_files=["res://.godot/imported/propeller.png-b22517bd48b6852e8daec6d97d6c29a8.ctex"]
+source_file="res://assets/sprites/enemies/hermit_crab.png"
+dest_files=["res://.godot/imported/hermit_crab.png-6c6524a90b1dbdb733d3595d05970131.ctex"]
 
 [params]
 

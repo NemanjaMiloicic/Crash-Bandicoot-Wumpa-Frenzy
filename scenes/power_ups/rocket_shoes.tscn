@@ -1,25 +1,25 @@
 [gd_scene load_steps=8 format=3 uid="uid://bf1j0kq4kcvq6"]
 
 [ext_resource type="Script" uid="uid://dsr01wc0xc0bi" path="res://scripts/rocket_shoes.gd" id="1_fc6ft"]
-[ext_resource type="Texture2D" uid="uid://bun6aax0v7rt2" path="res://assets/sprites/collectables/rocket_shoes.png" id="1_ksrsk"]
+[ext_resource type="Texture2D" uid="uid://cga83vn7u2wbw" path="res://assets/sprites/collectables/power_ups/rocket_shoes.png" id="2_3scn4"]
 [ext_resource type="AudioStream" uid="uid://ms78cfxo7hhl" path="res://assets/sounds/rocket_shoes.mp3" id="3_llibx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fc6ft"]
-atlas = ExtResource("1_ksrsk")
-region = Rect2(0, 0, 40, 7)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3scn4"]
+atlas = ExtResource("2_3scn4")
+region = Rect2(4, 0, 40, 7)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_llibx"]
-atlas = ExtResource("1_ksrsk")
-region = Rect2(40, 0, 40, 7)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0314w"]
+atlas = ExtResource("2_3scn4")
+region = Rect2(44, 0, 40, 7)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8mb0g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fc6ft")
+"texture": SubResource("AtlasTexture_3scn4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_llibx")
+"texture": SubResource("AtlasTexture_0314w")
 }],
 "loop": true,
 "name": &"blasting",
@@ -37,7 +37,7 @@ script = ExtResource("1_fc6ft")
 sprite_frames = SubResource("SpriteFrames_8mb0g")
 animation = &"blasting"
 autoplay = "blasting"
-frame_progress = 0.553805
+frame_progress = 0.414785
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, -0.5)

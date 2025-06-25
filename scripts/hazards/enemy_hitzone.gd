@@ -22,10 +22,10 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	if body.attacking:
 		if body.current_state is BellyFlopState:
-			parent.die_by_bounce()
+			EnemyHelper.die_by_bounce(parent)	
 		else:
 			parent.spun = true
-			parent.die_by_hit(body)
+			EnemyHelper.die_by_hit(parent, body)
 	
 	
 	elif body.invincibility_time.is_stopped():
@@ -33,7 +33,7 @@ func _on_body_entered(body: Node2D) -> void:
 				body.current_state.change_state("DeadState")
 				death_timer.start()
 			else:
-				parent.die()
+				EnemyHelper.die(parent)
 				body.animation_player.play("flash")
 				body.invincibility_time.start()
 		

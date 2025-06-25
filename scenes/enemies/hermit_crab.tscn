@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://dn66tdqk8io78"]
+
+[ext_resource type="Texture2D" uid="uid://3y4ufvmwmss2" path="res://assets/sprites/enemies/hermit_crab.png" id="1_xr87t"]
+[ext_resource type="PackedScene" uid="uid://6q2x41rotij1" path="res://scenes/hazards/enemy_hitzone.tscn" id="2_5vlk1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijvhd"]
+atlas = ExtResource("1_xr87t")
+region = Rect2(33, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm34w"]
+atlas = ExtResource("1_xr87t")
+region = Rect2(8, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpy3y"]
+atlas = ExtResource("1_xr87t")
+region = Rect2(33, 0, 25, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7g08i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijvhd")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm34w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpy3y")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xr87t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vlk1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijvhd"]
+size = Vector2(20, 4)
+
+[node name="HermitCrab" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7g08i")
+animation = &"walking"
+frame_progress = 0.444383
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_xr87t")
+
+[node name="HitboxArea" parent="." instance=ExtResource("2_5vlk1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_5vlk1")
+
+[node name="HeadArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadArea"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_ijvhd")
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SpinDeathSound" type="AudioStreamPlayer" parent="."]
+
+[node name="ClickClackSound" type="AudioStreamPlayer2D" parent="."]

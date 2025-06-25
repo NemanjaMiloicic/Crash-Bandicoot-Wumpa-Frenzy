@@ -2,7 +2,7 @@ class_name 	CrateHelper
 extends Node
 
 const BOOST_SLID := 20
-const BOOST_REGULAR := 60
+const BOOST_REGULAR := 80
 const BOOST_BOUNCY := 45
 static func bounce_of_crate(crate: Node2D, body: Node2D, counted: bool) -> void:
 	if body.is_in_group("player"):

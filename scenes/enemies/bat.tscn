@@ -1,0 +1,133 @@
+[gd_scene load_steps=19 format=3 uid="uid://ckem01mdvmjqv"]
+
+[ext_resource type="Texture2D" uid="uid://5vrymihj0lk" path="res://assets/sprites/enemies/bat.png" id="1_4k4o5"]
+[ext_resource type="Script" uid="uid://b173codhgwtb4" path="res://scripts/enemies/bat/bat.gd" id="1_jofwc"]
+[ext_resource type="Texture2D" uid="uid://ceglaihaud0x4" path="res://assets/sprites/enemies/sleeping_bat.png" id="2_5m14n"]
+[ext_resource type="PackedScene" uid="uid://6q2x41rotij1" path="res://scenes/hazards/enemy_hitzone.tscn" id="3_5m14n"]
+[ext_resource type="AudioStream" uid="uid://cpntgb6lq738v" path="res://assets/sounds/spin_enemy.wav" id="4_i6os3"]
+[ext_resource type="AudioStream" uid="uid://c466ufyvmlirk" path="res://assets/sounds/enemy_bounce.wav" id="5_18mee"]
+[ext_resource type="AudioStream" uid="uid://nckylht51cdi" path="res://assets/sounds/bat_screech.mp3" id="7_ss5yy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6os3"]
+atlas = ExtResource("1_4k4o5")
+region = Rect2(84, 0, 28, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18mee"]
+atlas = ExtResource("1_4k4o5")
+region = Rect2(1, 0, 27, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jofwc"]
+atlas = ExtResource("1_4k4o5")
+region = Rect2(28, 0, 27, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss5yy"]
+atlas = ExtResource("1_4k4o5")
+region = Rect2(55, 0, 27, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0cyw"]
+atlas = ExtResource("1_4k4o5")
+region = Rect2(82, 0, 27, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0x8h"]
+atlas = ExtResource("2_5m14n")
+region = Rect2(0, 0, 28, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m5s8h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6os3")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18mee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jofwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss5yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0cyw")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0x8h")
+}],
+"loop": true,
+"name": &"sleeping",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ss5yy"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_18mee"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jofwc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18mee"]
+size = Vector2(23, 6)
+
+[node name="Bat" type="CharacterBody2D"]
+scale = Vector2(0.75, 0.75)
+collision_layer = 2
+script = ExtResource("1_jofwc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m5s8h")
+animation = &"flying"
+autoplay = "sleeping"
+frame_progress = 0.0873181
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ss5yy")
+
+[node name="EnemyArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyArea"]
+shape = SubResource("WorldBoundaryShape2D_18mee")
+
+[node name="HitboxArea" parent="." instance=ExtResource("3_5m14n")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
+shape = SubResource("RectangleShape2D_jofwc")
+
+[node name="HeadArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadArea"]
+position = Vector2(-0.5, -7)
+shape = SubResource("RectangleShape2D_18mee")
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SpinDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_i6os3")
+bus = &"SFX2"
+
+[node name="BounceDeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_18mee")
+volume_db = 10.0
+bus = &"SFX2"
+
+[node name="BatScreechSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ss5yy")
+bus = &"SFX"
+
+[connection signal="body_entered" from="EnemyArea" to="." method="_on_enemy_area_body_entered"]
+[connection signal="body_entered" from="HeadArea" to="." method="_on_head_area_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

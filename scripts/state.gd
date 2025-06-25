@@ -19,8 +19,6 @@ func physics_update(_delta: float) -> void:
 
 
 func change_state(state_name: String) -> void:
-
-	
 	state_owner.previous_state = state_owner.current_state
 	state_owner.current_state.exit()
 	state_owner.current_state = state_owner.states[state_name]

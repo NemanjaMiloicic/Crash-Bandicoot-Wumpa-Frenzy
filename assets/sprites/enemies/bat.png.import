@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bun6aax0v7rt2"
-path="res://.godot/imported/rocket_shoes.png-595fa983bcd63a6b198258ae7e4496da.ctex"
+uid="uid://5vrymihj0lk"
+path="res://.godot/imported/bat.png-d00f50ec45070675263f6e54608da2f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/collectables/rocket_shoes.png"
-dest_files=["res://.godot/imported/rocket_shoes.png-595fa983bcd63a6b198258ae7e4496da.ctex"]
+source_file="res://assets/sprites/enemies/bat.png"
+dest_files=["res://.godot/imported/bat.png-d00f50ec45070675263f6e54608da2f9.ctex"]
 
 [params]
 

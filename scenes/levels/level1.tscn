@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://dhhelpesrveqq"]
+[gd_scene load_steps=46 format=4 uid="uid://dhhelpesrveqq"]
 
 [ext_resource type="PackedScene" uid="uid://bhu8ojinbsekf" path="res://scenes/player.tscn" id="3_u068y"]
 [ext_resource type="Texture2D" uid="uid://chm1epfai5xub" path="res://assets/sprites/world_tileset.png" id="4_1ooyw"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://ki4sg7d0yve7" path="res://scenes/crates/metal_crates/nitro_detonator.tscn" id="26_arkx4"]
 [ext_resource type="PackedScene" uid="uid://c7idiq1xej81r" path="res://scenes/crates/tnt_crate.tscn" id="29_7plwd"]
 [ext_resource type="PackedScene" uid="uid://cwuvx231vavg5" path="res://scenes/enemies/frog.tscn" id="38_b2isc"]
+[ext_resource type="PackedScene" uid="uid://ckem01mdvmjqv" path="res://scenes/enemies/bat.tscn" id="39_qg8x4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("4_1ooyw")
@@ -253,6 +254,7 @@ limit_top = -150
 limit_bottom = 160
 limit_smoothed = true
 position_smoothing_enabled = true
+position_smoothing_speed = 3.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -434,9 +436,6 @@ position = Vector2(1912, 103)
 [node name="RandomCrate5" parent="Crates" instance=ExtResource("8_6gwlt")]
 position = Vector2(1836, 137)
 
-[node name="NitroCrate7" parent="Crates" instance=ExtResource("25_vhxpm")]
-position = Vector2(1432, 120)
-
 [node name="Hazards" type="Node" parent="."]
 
 [node name="Bonfire" parent="Hazards" instance=ExtResource("7_3oqy1")]
@@ -525,3 +524,9 @@ position = Vector2(-219, 146)
 
 [node name="Frog" parent="Enemies" instance=ExtResource("38_b2isc")]
 position = Vector2(1349, 104)
+
+[node name="Bat" parent="Enemies" instance=ExtResource("39_qg8x4")]
+position = Vector2(1160, -58)
+
+[node name="Bat2" parent="Enemies" instance=ExtResource("39_qg8x4")]
+position = Vector2(1000, -73)
